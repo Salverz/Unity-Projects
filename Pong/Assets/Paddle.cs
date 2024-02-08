@@ -5,40 +5,39 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     public float unitsPerSecond = 3f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    public GameObject player1Paddle;
+    public GameObject player2Paddle;
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalValue = Input.GetAxis("Horizontal");
-        Vector3 force = Vector3.right * horizontalValue;
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(force, ForceMode.Force);
+        if (Input.GetAxis("Player1") != 0) {
+            Vector3 newVelocity = new Vector3(-20, 0, 0) * Input.GetAxis("Player1");
+            player1Paddle.GetComponent<Rigidbody>().velocity = newVelocity;
+        }
+        if (Input.GetAxis("Player2") != 0)
+        {
+            Vector3 newVelocity = new Vector3(-20, 0, 0) * Input.GetAxis("Player2");
+            player2Paddle.GetComponent<Rigidbody>().velocity = newVelocity;
+        }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"we hit {collision.gameObject.name}");
-
-        // Get reference to paddle collider
-        BoxCollider bc = GetComponent<BoxCollider>();
-        Bounds bounds = bc.bounds;
-        float maxX = bounds.max.x;
-        float minX = bounds.min.x;
-
-        Debug.Log($"maxX = {maxX}, minX = {minX}");
-        Debug.Log($"x pos of ball is {collision.transform.position}");
-        
-        Quaternion rotation = Quaternion.Euler(0f, 0f, 60f);
-        Vector3 bounceDirection = rotation * Vector3.up;
+        if (collision.gameObject.name != "Ball")
+        {
+            return;
+        }
 
         Rigidbody rb = collision.rigidbody;
-        rb.AddForce(bounceDirection * 1000f, ForceMode.Force);
+        
+        float contactPoint = collision.contacts[0].point.x;
+        float pointOnPaddle = this.gameObject.GetComponent<Rigidbody>().position.x - contactPoint;
+
+        float reflectionAngle = (pointOnPaddle / 2.5f) * 50f;
+        rb.velocity = new Vector3(reflectionAngle, 0, rb.velocity.z * -1);
+
     }
 }
