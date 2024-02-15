@@ -39,7 +39,6 @@ public class BallController : MonoBehaviour
 
     public void resetBall(int winner)
     {
-
         rb.transform.position = new Vector3(-10, 0, 0);
         if (winner == 1)
         {
