@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
         if (currentPowerup != null)
         {
             currentPowerup.GetComponent<Powerup>().destroySelf();
-            Debug.Log("Destroying powerup");
         }
         currentPowerup = Instantiate(powerup, new Vector3(Random.Range(-6f, 6f), 0f, Random.Range(-5f, 5f)), Quaternion.identity);
         currentPowerup.transform.Rotate(Vector3.up, 45f);
