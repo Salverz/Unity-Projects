@@ -847,9 +847,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -862,6 +863,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1759655566}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1759655569}
   m_SourcePrefab: {fileID: 100100000, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
 --- !u!1 &1267995103
 GameObject:
@@ -1325,7 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 10
   maxSpeed: 100
-  jumpImpulse: 50
+  jumpImpulse: 25
   jumpBoost: 3
   isGrounded: 0
 --- !u!136 &1759655567
@@ -1348,9 +1352,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3197961
-  m_Height: 1.836951
+  m_Height: 1.7834804
   m_Direction: 1
-  m_Center: {x: 0.0027985573, y: 0.836269, z: 0}
+  m_Center: {x: 0.0027985573, y: 0.8630043, z: -1.2014322e-17}
 --- !u!54 &1759655568
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1378,6 +1382,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 1
+--- !u!95 &1759655569
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759655565}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e10929e9f1dfb934680b614c4f58e268, type: 3}
+  m_Controller: {fileID: 9100000, guid: 389fa76e51ec8af48ae152846cfd3f9a, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2065297535
 GameObject:
   m_ObjectHideFlags: 0

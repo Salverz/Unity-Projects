@@ -68,5 +68,10 @@ public class CharacterControllerLive : MonoBehaviour
 
         float yaw = (rb.velocity.x > 0) ? 90 : -90;
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        float speed = Mathf.Abs(rb.velocity.x);
+        Animator anim = GetComponent<Animator>();
+        anim.SetFloat("Speed", speed);
+        anim.SetBool("In Air", !isGrounded);
     }
 }
