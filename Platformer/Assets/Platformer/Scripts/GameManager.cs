@@ -10,14 +10,21 @@ public class GameManager : MonoBehaviour
     public Material questionMaterial;
     private int coins = 0;
     private float lastUpdateTime = 0;
+    private bool failed = false;
 
     // Update is called once per frame
     void Update()
     {
         // Timer Text
-        int intTime = 400 - (int)Time.realtimeSinceStartup;
+        int intTime = Mathf.Max(100 - (int)Time.realtimeSinceStartup, 0);
+        if (intTime == 0 && !failed) {
+            Debug.Log("You failed!");
+            failed = true;
+        }
+
         string timeStr = $"TIME\n{intTime}";
         timerText.text = timeStr;
+        
 
         // Clicking on screen
         if (Input.GetMouseButtonDown(0)) {
@@ -28,12 +35,10 @@ public class GameManager : MonoBehaviour
             if (hit.collider != null) {
                 if (hit.collider.name == "Brick(Clone)") 
                 {
-                    Debug.Log(hit.collider.name);
                     Destroy(hit.collider.gameObject);
                 }
                 else if (hit.collider.name == "Question(Clone)")
                 {
-                    Debug.Log(hit.collider.name);
                     coins++;
                     string coinStr = $"COIN: x{coins}";
                     coinText.text = coinStr;

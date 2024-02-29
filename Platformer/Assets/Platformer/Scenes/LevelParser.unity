@@ -188,6 +188,9 @@ MonoBehaviour:
   jumpImpulse: 20
   jumpBoost: 3
   isGrounded: 0
+  scoreText: {fileID: 0}
+  coinText: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!136 &244567055
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -322,11 +325,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6568559d6661b4eba05e67f1401a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filename: Test
+  filename: NewLevel
   rockPrefab: {fileID: 2652198492393551387, guid: 981bb3414d36746408a1c5ee5244f1b1, type: 3}
   brickPrefab: {fileID: 2652198492393551387, guid: d94221691cf23ce429136e2be05d002b, type: 3}
   questionBoxPrefab: {fileID: 2652198492393551387, guid: 47ab01733ddf33e4ba14ecdf29b6fad8, type: 3}
   stonePrefab: {fileID: 2652198492393551387, guid: e2bf2963d586ea44ea04e84c9ae1fa8e, type: 3}
+  waterPrefab: {fileID: 4201222464156187784, guid: dd793bad667900941baa9188ca7e8037, type: 3}
+  flagPrefab: {fileID: 4201222464156187784, guid: aa523d069aabd0141a3867dce78b10b9, type: 3}
   environmentRoot: {fileID: 727678647}
 --- !u!114 &406602704
 MonoBehaviour:
@@ -633,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &859565990
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -712,6 +717,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -786,13 +792,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.08, y: 5.49, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.080002, y: 5.49, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &963194229
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 124
+  m_CollisionDetection: 0
 --- !u!1001 &1256712288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1327,11 +1360,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced4681538d08f4498c4762f6a3de81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
-  maxSpeed: 100
+  acceleration: 80
+  maxSpeed: 12
   jumpImpulse: 25
   jumpBoost: 3
   isGrounded: 0
+  scoreText: {fileID: 1570182997}
+  coinText: {fileID: 1267995105}
+  mainCamera: {fileID: 963194225}
 --- !u!136 &1759655567
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1352,9 +1388,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3197961
-  m_Height: 1.7834804
+  m_Height: 1.7570181
   m_Direction: 1
-  m_Center: {x: 0.0027985573, y: 0.8630043, z: -1.2014322e-17}
+  m_Center: {x: 0.0027985573, y: 0.8762355, z: -1.2014322e-17}
 --- !u!54 &1759655568
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1494,7 +1530,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'TIME
 
-    400'
+    100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
