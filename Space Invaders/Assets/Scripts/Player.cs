@@ -29,11 +29,17 @@ public class Player : MonoBehaviour
     {
       if (Input.GetKeyDown(KeyCode.Space))
       {
+        GetComponent<Animator>().SetTrigger("Shoot Trigger");
         GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
         Debug.Log("Bang!");
 
         Destroy(shot, 3f);
 
       }
+    }
+
+    void SomeAnimationFrameCallback()
+    {
+      Debug.Log("something happened in the animation!");
     }
 }
