@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -27,14 +28,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if (Input.GetKeyDown(KeyCode.Space))
+      if (Input.GetKey(KeyCode.Space))
       {
-        GetComponent<Animator>().SetTrigger("Shoot Trigger");
-        GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
-        Debug.Log("Bang!");
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("bullet");
+        if (bullets.Length == 0)
+        {
+          GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
+        }
+      }
 
-        Destroy(shot, 3f);
+      if (Input.GetKey(KeyCode.A))
+      {
+        Vector3 currentPos = gameObject.transform.position;
+        Vector3 newPos = new Vector3(currentPos.x - .02f, currentPos.y, currentPos.z);
 
+        gameObject.transform.position = newPos;
+      }
+      else if (Input.GetKey(KeyCode.D))
+      {
+        Vector3 currentPos = gameObject.transform.position;
+        Vector3 newPos = new Vector3(currentPos.x + .02f, currentPos.y, currentPos.z);
+
+        gameObject.transform.position = newPos;
       }
     }
 

@@ -19,6 +19,13 @@ public class Bullet : MonoBehaviour
     private void Fire()
     {
       myRigidbody2D.velocity = Vector2.up * speed; 
-      Debug.Log("Wwweeeeee");
+    }
+
+    void Update()
+    {
+      if (gameObject.transform.position.y >= 5.12)
+      {
+        Destroy(gameObject);
+      }
     }
 }
