@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class EnemyController : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject infoText;
     public TextMeshProUGUI scoreTable;
+    public AudioClip shootSound;
     private int currentEnemyDirection = -1;
     private List<GameObject> enemies = new List<GameObject>();
     private int score;
@@ -26,11 +29,14 @@ public class EnemyController : MonoBehaviour
 
     public delegate void OneEnemyDied();
     public static event OneEnemyDied OnOneEnemyDied;
+    public delegate void AllEnemiesDied();
+    public static event AllEnemiesDied OnAllEnemiesDied;
 
     // Start is called before the first frame update
     void Start()
     {   
-        Invoke("HandleStart", 3);
+        // Invoke("HandleStart", 0);
+        HandleStart();
     }
 
     void HandleStart()
@@ -74,15 +80,19 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool gameOver = true;
         foreach (GameObject enemy in enemies) {
             if (enemy == null)
             {
                 continue;
             }
+            gameOver = false;
             if (Time.realtimeSinceStartup - lastBulletTime >= 3)
             {
                 Instantiate(enemyBullet, new Vector3(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z), Quaternion.identity);
                 lastBulletTime = Time.realtimeSinceStartup;
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.PlayOneShot(shootSound);
             }
             if (enemy.transform.position.x >= 9.5)
             {
@@ -102,6 +112,11 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
             }
+        }
+        if (gameOver)
+        {
+            Debug.Log("Game over!");
+            OnAllEnemiesDied.Invoke();
         }
     }
 

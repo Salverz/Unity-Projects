@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
     public GameObject enemyController;
     public delegate void EnemyDied(int pointsWorth);
     public static event EnemyDied OnEnemyDied;
+    public AudioClip deathSound;
 
     private int moveDirection = -1;
     public int points = 10;
@@ -40,7 +42,9 @@ public class Enemy : MonoBehaviour
             OnEnemyDied.Invoke(points);
             EnemyController.OnChangeEnemyDirection -= ChangeDirection;
             EnemyController.OnOneEnemyDied -= IncreaseSpeed;
-            Destroy(gameObject);
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.PlayOneShot(deathSound);
+            GetComponent<Animator>().SetTrigger("Died");
         }
     }
 
@@ -58,5 +62,10 @@ public class Enemy : MonoBehaviour
             newPos = new Vector3(currentPos.x + speed * moveDirection, currentPos.y, currentPos.z);
         }
         gameObject.transform.position = newPos;
+    }
+
+    void DeathAnimationFinish()
+    {
+        Destroy(gameObject);
     }
 }

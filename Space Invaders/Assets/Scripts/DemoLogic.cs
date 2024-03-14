@@ -7,6 +7,13 @@ public class DemoLogic : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI titleText;
 
+    public void Start()
+    {
+        EnemyController.OnAllEnemiesDied += GoToCredits;
+        Player.OnPlayerDiedEvent += GoToCredits;
+        CreditsController.OnCreditsEnded += SwitchToTitle;
+    }
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);     
@@ -21,6 +28,26 @@ public class DemoLogic : MonoBehaviour
     {
         Debug.Log("Running");
         StartCoroutine(FindPlayer());
+    }
+
+    public void GoToCredits()
+    {
+        StartCoroutine(SwitchToCredits());
+    }
+
+    IEnumerator SwitchToCredits()
+    {
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync("Credits");
+        while (!asyncOp.isDone)
+        {
+            yield return null;
+
+        }
+    }
+
+    void SwitchToTitle()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 
     IEnumerator FindPlayer()

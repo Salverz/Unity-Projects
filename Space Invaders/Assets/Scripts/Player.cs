@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
   public GameObject bullet;
 
   public Transform shottingOffset;
+  public AudioClip shootSound;
+  public AudioClip deathSound;
+  public delegate void PlayerDiedEvent();
+  public static event PlayerDiedEvent OnPlayerDiedEvent;
 
     private void Start()
     {
@@ -34,6 +39,9 @@ public class Player : MonoBehaviour
         if (bullets.Length == 0)
         {
           GameObject shot = Instantiate(bullet, shottingOffset.position, Quaternion.identity);
+          GetComponent<Animator>().SetTrigger("Shoot Trigger");
+          AudioSource audio = GetComponent<AudioSource>();
+          audio.PlayOneShot(shootSound);
         }
       }
 
@@ -56,5 +64,18 @@ public class Player : MonoBehaviour
     void SomeAnimationFrameCallback()
     {
       Debug.Log("something happened in the animation!");
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+      GetComponent<Animator>().SetTrigger("Died");
+      AudioSource audio = GetComponent<AudioSource>();
+      audio.PlayOneShot(deathSound);
+      Debug.Log("PLAYER HIT!");
+    }
+
+    void PlayerDied()
+    {
+      OnPlayerDiedEvent.Invoke();
     }
 }
