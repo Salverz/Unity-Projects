@@ -158,16 +158,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.84
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -197,9 +209,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4667f1f2beb52db4297179c8ff8466d6, type: 3}
       propertyPath: m_Name
-      value: Turret
+      value: StandardTurret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -236,9 +252,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 15
+  bulletPrefab: {fileID: 2281868704543944555, guid: 76a030790d493654e9bf75ae03201bcf, type: 3}
   fireRate: 1
+  useLaser: 0
+  damageOverTime: 30
+  slowAmount: 0.5
+  lineRenderer: {fileID: 0}
+  impactEffect: {fileID: 0}
+  impactLight: {fileID: 0}
   enemyTag: Enemy
   partToRotate: {fileID: 8296486302513882257}
   turnSpeed: 10
-  bulletPrefab: {fileID: 2281868704543944555, guid: 76a030790d493654e9bf75ae03201bcf, type: 3}
   firePoint: {fileID: 3550228174614109044}
