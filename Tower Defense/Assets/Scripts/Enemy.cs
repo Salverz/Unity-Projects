@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    private CinemachineTargetGroup targetGroup;
+
     public float startSpeed = 10f;
     [HideInInspector]
     public float speed;
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
     {
         speed = startSpeed;
         health = startHealth;
+        targetGroup = GameObject.Find("Target Group").GetComponent<CinemachineTargetGroup>();
     }
 
     public void TakeDamage(float amount)
@@ -46,6 +50,8 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         isDead = true;
+
+        targetGroup.RemoveMember(transform);
 
         PlayerStats.Money += worth;
 

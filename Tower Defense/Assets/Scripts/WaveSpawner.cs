@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public CinemachineTargetGroup cameraTargetGroup;
+    public CinemachineVirtualCamera virtualCamera;
+
     public static int EnemiesAlive = 0;
 
     public Wave[] waves;
@@ -22,6 +26,15 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        if (virtualCamera.Follow == null)
+        {
+            GameObject target = GameObject.FindWithTag("Enemy");
+            if (target != null)
+            {
+                virtualCamera.LookAt = target.transform;
+            }
+        }
+
         if (EnemiesAlive > 0)
         {
             return;
@@ -65,6 +78,8 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        GameObject waveEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        cameraTargetGroup.AddMember(waveEnemy.transform, 1, 0);
+        virtualCamera.LookAt = waveEnemy.transform;
     }
 }
